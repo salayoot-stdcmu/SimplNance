@@ -1,0 +1,21 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8282:8282"
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3456:3456"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/frontend
+      - /frontend/node_modules
+    restart: always
